@@ -1,30 +1,30 @@
 def score(game):
     result = 0
     frame = 1
-    in_first_half = True
-    for i in range(len(game)):
-        if game[i] == '/':
-            result += 10 - last
+    first_throw = True
+    for throw in range(len(game)):
+        if game[throw] == '/':
+            result += 10 - last_throw_score
         else:
-            result += get_value(game[i])
-        if frame < 10 and get_value(game[i]) == 10:
-            if game[i] == '/':
-                result += get_value(game[i+1])
-            elif game[i] == 'X' or game[i] == 'x':
-                result += get_value(game[i+1])
-                if game[i+2] == '/':
-                    result += 10 - get_value(game[i+1])
+            result += get_value(game[throw])
+        if frame < 10 and get_value(game[throw]) == 10:
+            if game[throw] == '/':
+                result += get_value(game[throw+1])
+            elif game[throw] == 'X' or game[throw] == 'x':
+                result += get_value(game[throw+1])
+                if game[throw+2] == '/':
+                    result += 10 - get_value(game[throw+1])
                 else:
-                    result += get_value(game[i+2])
-        last = get_value(game[i])
-        if not in_first_half:
+                    result += get_value(game[throw+2])
+        last_throw_score = get_value(game[throw])
+        if not first_throw:
             frame += 1
-        if in_first_half:
-            in_first_half = False
+        if first_throw:
+            first_throw = False
         else:
-            in_first_half = True
-        if game[i] == 'X' or game[i] == 'x':
-            in_first_half = True
+            first_throw = True
+        if game[throw] == 'X' or game[throw] == 'x':
+            first_throw = True
             frame += 1
     return result
 
