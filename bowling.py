@@ -17,13 +17,12 @@ def score(game):
                 else:
                     result += get_value(game[throw+2])
         last_throw_score = get_value(game[throw])
-        if not first_throw:
-            frame += 1
         if first_throw:
             first_throw = False
         else:
             first_throw = True
-        if game[throw] == 'X' or game[throw] == 'x':
+            frame += 1
+        if game[throw].lower() == 'x':
             first_throw = True
             frame += 1
     return result
