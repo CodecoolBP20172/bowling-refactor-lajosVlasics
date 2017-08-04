@@ -3,30 +3,28 @@ def score(game):
     frame = 1
     first_throw = True
 
-    for ball in range(len(game)):
-        if game[ball] == '/':
-            result += 10 - last_throw_score
+    for throw in range(len(game)):
+        if game[throw] == '/':
+            result += 10 - get_value(game[throw-1])
         else:
-            result += get_value(game[ball])
+            result += get_value(game[throw])
 
-        if frame < 10 and get_value(game[ball]) == 10:
-            if game[ball] == '/':
-                result += get_value(game[ball+1])
-            elif game[ball] == 'X' or game[ball] == 'x':
-                result += get_value(game[ball+1])
-                if game[ball+2] == '/':
-                    result += 10 - get_value(game[ball+1])
+        if frame < 10 and get_value(game[throw]) == 10:
+            if game[throw] == '/':
+                result += get_value(game[throw+1])
+            elif game[throw] == 'X' or game[throw] == 'x':
+                result += get_value(game[throw+1])
+                if game[throw+2] == '/':
+                    result += 10 - get_value(game[throw+1])
                 else:
-                    result += get_value(game[ball+2])
+                    result += get_value(game[throw+2])
 
-        last_throw_score = get_value(game[ball])
-        
-        if game[ball].lower() == 'x' or not first_throw:
+        if not first_throw or game[throw].lower() == 'x':
             first_throw = True
             frame += 1
         else:
             first_throw = False
-    
+
     return result
 
 
