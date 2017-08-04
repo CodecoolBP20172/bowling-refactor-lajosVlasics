@@ -9,11 +9,9 @@ def score(game):
         else:
             result += get_value(game[throw])
 
-        if frame < 10 and get_value(game[throw]) == 10:
-            if game[throw] == '/':
-                result += get_value(game[throw+1])
-            elif game[throw] == 'X' or game[throw] == 'x':
-                result += get_value(game[throw+1])
+        if game[throw].lower() in ("x/") and frame < 10:
+            result += get_value(game[throw+1])
+            if game[throw].lower() == 'x':
                 if game[throw+2] == '/':
                     result += 10 - get_value(game[throw+1])
                 else:
